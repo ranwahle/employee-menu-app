@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "install-client": "cd client && npm i",
+    "build-client" : "cd client && npm run build",
     "start": "node server.js"
   },
   "dependencies": {
