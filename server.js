@@ -13,18 +13,33 @@ const HOST = '0.0.0.0';
 // App
 const app = express();
 
+const bodyParser = require('body-parser');
+app.use(bodyParser());
+
 app.get('/api/employees/', authMiddleware,  (req, res) => {
         client.getEmployees().then(result => res.end(JSON.stringify(result)))
     }
 )
 
 app.get('/api/employee/:id', authMiddleware, (req, res) => {
-    res.end(JSON.stringify({}))
+   client.getEmployee(req.params.id).then(emp => res.end(JSON.stringify(emp)))
+})
+
+app.delete('/api/employee/:id', authMiddleware, (req, res) => {
+    client.deleteEmployee(req.params.id).then(() => res.end())
 })
 
 app.post('/api/employee', authMiddleware, (req, res) => {
-    client.addEmployee(req.body);
-    res.end(JSON.stringify(treq.body))
+    client.addEmployee(req.body).then(result => {
+        res.end(JSON.stringify(result))
+    })
+
+})
+app.put('/api/employee/:id', authMiddleware, (req, res) => {
+    console.log('employee', req.body)
+    client.updateEmployee(req.body).then(result => {
+        res.end(JSON.stringify(result))
+    })
 })
 
 

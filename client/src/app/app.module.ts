@@ -8,15 +8,21 @@ import {routes} from './app.routes';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {BaseUrlInterceptorService} from './base-url-interceptor.service';
 import {NavbarComponent} from './navbar/navbar.component';
-import {MatTableModule, MatToolbarModule} from '@angular/material';
-import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
+import {MatDialogModule, MatTableModule, MatToolbarModule} from '@angular/material';
+import {EditEmployeeComponent} from './edit-employee/edit-employee.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AreYouSureComponent} from './are-you-sure/are-you-sure.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MenuItemsComponent } from './menu-items/menu-items.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeeComponent,
     NavbarComponent,
-    EditEmployeeComponent
+    EditEmployeeComponent,
+    AreYouSureComponent,
+    MenuItemsComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,9 +30,14 @@ import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
     HttpClientModule,
     MatToolbarModule,
     MatTableModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    BrowserAnimationsModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptorService, multi: true}],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AreYouSureComponent]
 })
 export class AppModule {
 }

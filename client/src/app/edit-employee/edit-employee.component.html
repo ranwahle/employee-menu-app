@@ -1,3 +1,21 @@
-<p>
-  edit-employee works!
-</p>
+<h2>{{addOrEdit}} Employee Details</h2>
+<form *ngIf="employee" (submit)="saveEmployee()" >
+
+  <label>
+    First name
+    <input type="text" name="firstName" [(ngModel)]="employee.firstName">
+  </label>
+  <br>
+  <label>
+    Last name
+    <input type="text" name="lastName" [(ngModel)]="employee.lastName">
+  </label>
+  <br/>
+  <label>
+    Social Security Number
+    <input type="text" name="ssn" [(ngModel)]="employee.ssn">
+  </label>
+  <br/>
+  <button type="submit">Save</button>
+
+</form>

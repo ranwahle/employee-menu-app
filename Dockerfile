@@ -11,12 +11,15 @@ WORKDIR /usr/src/app
 # COPY . /app
 COPY package*.json ./
 # Install any needed packages specified in requirements.txt
-# RUN pip install --trusted-host pypi.python.org -r requirements.txt
-RUN npm install --only=production
 
+RUN npm install --only=production
+COPY ./client ./client
+RUN cd ./client
+RUN npm install --only=production
+RUN npm build
 COPY . .
 
-# Make port 80 available to the world outside this container
+# Make port 8081 available to the world outside this container
 EXPOSE 8081
 
 # Define environment variable
