@@ -2,7 +2,7 @@ version: "3"
 services:
   web:
     # replace username/repo:tag with your name and image details
-    image: ranwahle/get-started:part2
+    image: ranwahle/get-started:employee-menu
     deploy:
       replicas: 5
       resources:
