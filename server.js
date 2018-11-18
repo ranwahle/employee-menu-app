@@ -7,22 +7,24 @@ const client = require('./employee-db-client');
 const authMiddleware = require('./athentication-middleware')
 
 // Constants
-const PORT = 8081;
+const PORT = 8082;
 const HOST = '0.0.0.0';
 
 // App
 const app = express();
 
 const bodyParser = require('body-parser');
-app.use(bodyParser());
+app.use(bodyParser.json());
 
 app.get('/api/employees/', authMiddleware,  (req, res) => {
-        client.getEmployees().then(result => res.end(JSON.stringify(result)))
+        client.getEmployees().then(result => res.end(JSON.stringify(result)),
+            err => res.status(500).end(JSON.stringify(err)))
     }
 )
 
 app.get('/api/employee/:id', authMiddleware, (req, res) => {
-   client.getEmployee(req.params.id).then(emp => res.end(JSON.stringify(emp)))
+   client.getEmployee(req.params.id).then(emp => res.end(JSON.stringify(emp)),
+       err => res.status(500).end(JSON.stringify(err)))
 })
 
 app.delete('/api/employee/:id', authMiddleware, (req, res) => {
@@ -32,7 +34,7 @@ app.delete('/api/employee/:id', authMiddleware, (req, res) => {
 app.post('/api/employee', authMiddleware, (req, res) => {
     client.addEmployee(req.body).then(result => {
         res.end(JSON.stringify(result))
-    })
+    },   err => res.status(500).end(JSON.stringify(err)))
 
 })
 app.put('/api/employee/:id', authMiddleware, (req, res) => {

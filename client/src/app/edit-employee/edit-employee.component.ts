@@ -15,7 +15,9 @@ export class EditEmployeeComponent implements OnInit, OnDestroy {
   subscriptions: Subscription;
   employee: Employee;
   addOrEdit = 'Add';
-  constructor(private activatedRoute: ActivatedRoute, private employeesService: EmployeesService, private router: Router) { }
+
+  constructor(private activatedRoute: ActivatedRoute, private employeesService: EmployeesService, private router: Router) {
+  }
 
   ngOnInit() {
     this.subscriptions = this.activatedRoute.params.subscribe(params => {

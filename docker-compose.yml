@@ -1,8 +1,23 @@
 version: "3"
 services:
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: "mysecretpassword"
+      POSTGRESS_USER: "postgres"
+    networks:
+    - webnet
+    ports:
+    - "5432:5432"
+
   web:
     # replace username/repo:tag with your name and image details
     image: ranwahle/get-started:employee-menu
+    environment:
+      dbUser: "postgres"
+      pgPassword: "mysecretpassword"
     deploy:
       replicas: 5
       resources:
@@ -11,9 +26,15 @@ services:
           memory: 50M
       restart_policy:
         condition: on-failure
+    depends_on:
+      - "db"
     ports:
-    - "4000:80"
+    - "4000:8082"
     networks:
     - webnet
+    build:
+      .
+
+
 networks:
   webnet:

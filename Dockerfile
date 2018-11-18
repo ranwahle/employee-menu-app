@@ -14,13 +14,15 @@ COPY package*.json ./
 
 RUN npm install --only=production
 COPY ./client ./client
-RUN cd ./client
-RUN npm install --only=production
-RUN npm build
+COPY ./client/package*.json ./client/
+RUN cd ./client && npm install  && npm run build
+#RUN
+#RUN npm run build
 COPY . .
+COPY ./client/*/* ./client/
 
 # Make port 8081 available to the world outside this container
-EXPOSE 8081
+EXPOSE 8082
 
 # Define environment variable
 #ENV NAME World
