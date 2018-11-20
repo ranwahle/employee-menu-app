@@ -9,6 +9,10 @@
     $ npm start 
     (This should build the client app, and run the server) 
  
+ ### Run from docker
+    $ docker-compose up
+   Browse [http://localhost:4000](http://localhost:4000)
+    
  ### This app uses
     1. psotgres DB
     2. node.js server side 
